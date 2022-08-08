@@ -8,6 +8,9 @@
   </head>
 
   <body style="background-color: black">
+    <a href="../../" class="previous round">
+      <h5 style="margin: 2% 0 4% 0">◀️ Go Back</h5></a
+    >
     <div class="center">
       <div id="container"></div>
     </div>
@@ -22,6 +25,13 @@
       var uniforms;
 
       let screen_width = 500;
+      let viewport_width = window.innerWidth;
+      let viewport_height = window.innerHeight;
+
+      if (Math.min(viewport_height, viewport_width) < 900) {
+        screen_width = Math.min(viewport_height, viewport_width) / 2;
+        console.log(screen_width);
+      }
 
       init();
       animate();
