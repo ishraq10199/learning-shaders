@@ -1,5 +1,41 @@
+.card {
+  width: 25rem;
+}
+
 .card:hover {
   box-shadow: rgb(10, 10, 10) 30px 30px 15px;
   transform: translate(-5px, -5px);
   transition: height 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.center {
+  height: 99%;
+  border: 2px solid white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-border {
+  align-items: baseline;
+  border: none;
+}
+
+@media only screen and (max-width: 744px) {
+  .center {
+    border: 2px solid white;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: auto;
+  }
+
+  .no-border {
+    align-items: center;
+    border: none;
+  }
+
+  .card {
+    width: 70vw;
+  }
 }

@@ -3,7 +3,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -23,41 +22,41 @@
     <div class="container jumbotron text-center pt-5 pb-5">
       <h1 class="text-white">✨<i>Some of the stuff I know right now</i>✨</h1>
     </div>
-    <div class="d-flex">
-      <div class="row">
-        <div class="col p-0">
-          <div class="card m-5" style="width: 18rem">
-            <a class="text-decoration-none text-black" href="./examples/01/">
-              <img src="thumbnails/01.gif" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">01. The Big Pink Pixel</h5>
-                <p class="card-text">
-                  Hello world example, nothing much except a big pink pixel
-                </p>
-                <!-- <a href="#" class="btn btn-primary"></a> -->
-              </div>
-            </a>
+    <div class="center no-border">
+      <div class="card m-5">
+        <a class="text-decoration-none text-black" href="./examples/01/">
+          <img src="thumbnails/01.gif" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title fw-semibold fst-italic">
+              01. The Big Pink Pixel
+            </h5>
+            <p class="card-text">
+              Hello world example, nothing much except a big pink pixel
+            </p>
+            <!-- <a href="#" class="btn btn-primary"></a> -->
           </div>
-        </div>
-        <div class="col p-0">
-          <div class="card m-5" style="width: 18rem">
-            <a
-              href="./examples/01/variant_a/"
-              class="text-decoration-none text-black"
-            >
-              <img src="thumbnails/01a.gif" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">01a. The Flickering Pink Pixel</h5>
-                <p class="card-text">
-                  Introduced <code>u_time</code> to flicker the pixel in
-                  <code>example 01</code> with time
-                </p>
-                <!-- <a href="#" class="btn btn-primary"></a> -->
-              </div>
-            </a>
+        </a>
+      </div>
+
+      <div class="card m-5">
+        <a
+          href="./examples/01/variant_a/"
+          class="text-decoration-none text-black"
+        >
+          <img src="thumbnails/01a.gif" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title fw-semibold fst-italic">
+              01a. The Flickering Pink Pixel
+            </h5>
+            <p class="card-text">
+              Introduced <code>u_time</code> to flicker the pixel in
+              <code>example 01</code> with time
+            </p>
+            <!-- <a href="#" class="btn btn-primary"></a> -->
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </body>
+  <link rel="stylesheet" href="./style.css" />
 </html>
