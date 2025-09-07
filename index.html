@@ -1,63 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="m-0 min-h-full">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
-      crossorigin="anonymous"
-    />
-
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <title>Learning Shaders</title>
   </head>
-  <body style="background-color: rgb(30, 30, 30)">
-    <div class="container jumbotron text-center pt-5 pb-5">
-      <h1 class="text-white">✨<i>Some of the stuff I know right now</i>✨</h1>
+  <body class="font-mono m-0 min-h-full bg-gray-800">
+    <div class="flex justify-center py-8">
+      <h1
+        class="text-5xl font-bold w-fit bg-white px-4 pt-8 pb-6 rounded-lg shadow-md"
+      >
+        🐱 Sandbox 🐱
+      </h1>
     </div>
-    <div class="center no-border">
-      <div class="card m-5">
-        <a class="text-decoration-none text-black" href="./examples/01/">
-          <img src="thumbnails/01.gif" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title fw-semibold fst-italic">
-              01. The Big Pink Pixel
-            </h5>
-            <p class="card-text">
-              Hello world example, nothing much except a big pink pixel
-            </p>
-            <!-- <a href="#" class="btn btn-primary"></a> -->
-          </div>
-        </a>
-      </div>
-
-      <div class="card m-5">
-        <a
-          href="./examples/01/variant_a/"
-          class="text-decoration-none text-black"
-        >
-          <img src="thumbnails/01a.gif" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title fw-semibold fst-italic">
-              01a. The Flickering Pink Pixel
-            </h5>
-            <p class="card-text">
-              Introduced <code>u_time</code> to flicker the pixel in
-              <code>example 01</code> with time
-            </p>
-            <!-- <a href="#" class="btn btn-primary"></a> -->
-          </div>
-        </a>
-      </div>
-    </div>
+    <div
+      class="flex flex-wrap justify-center gap-4 p-4"
+      id="entryContainer"
+    ></div>
   </body>
-  <link rel="stylesheet" href="./style.css" />
+  <script>
+    const entries = [
+      {
+        id: "01",
+        title: "The Big Pink Pixel",
+        description:
+          "Hello world example, nothing much except a big pink pixel.",
+      },
+      {
+        id: "01a",
+        title: "The Flickering Pink Pixel",
+        description: `Introduced <span class="font-semibold">u_time</span> to flicker
+              the pixel in <span class="font-semibold">example 01</span> with
+              time.`,
+      },
+    ];
+
+    const makeEntry = ({
+      id = "01",
+      title = "The Title Here",
+      description = "Description",
+    }) => {
+      const outerDiv = document.createElement("div");
+      outerDiv.classList.add("bg-white", "rounded-lg", "p-4");
+
+      const link = document.createElement("a");
+      link.href = `/examples/${id}/`;
+      link.classList.add("flex", "flex-col");
+
+      const image = document.createElement("img");
+      image.classList.add("w-lg");
+      image.alt = "...";
+      image.src = `/thumbnails/${id}.gif`;
+
+      const card = document.createElement("div");
+      card.classList.add("flex", "flex-col");
+
+      const cardTitle = document.createElement("h5");
+      cardTitle.classList.add("font-semibold", "text-xl", "py-2");
+      cardTitle.innerText = `${id}. ${title}`;
+
+      const cardBody = document.createElement("p");
+      cardBody.classList.add("text-wrap", "w-lg");
+      cardBody.innerHTML = description;
+
+      card.append(cardTitle, cardBody);
+      link.append(image, card);
+      outerDiv.append(link);
+
+      document.querySelector("#entryContainer").append(outerDiv);
+    };
+
+    for (const entry of entries) {
+      makeEntry(entry);
+    }
+  </script>
 </html>

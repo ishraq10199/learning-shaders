@@ -1,6 +1,5 @@
 const fragment = `
 
-
 uniform float u_time;
 
 void main() {
