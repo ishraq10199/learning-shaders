@@ -4,14 +4,14 @@ var container;
 var camera, scene, renderer, clock;
 var uniforms;
 
-let screen_width = 500;
-let viewport_width = window.innerWidth;
-let viewport_height = window.innerHeight;
+// let screen_width = 500;
+// let viewport_width = window.innerWidth;
+// let viewport_height = window.innerHeight;
+// if (Math.min(viewport_height, viewport_width) < 900) {
+//   screen_width = Math.min(viewport_height, viewport_width) / 2;
+//   console.log(screen_width);
+// }
 
-if (Math.min(viewport_height, viewport_width) < 900) {
-  screen_width = Math.min(viewport_height, viewport_width) / 2;
-  console.log(screen_width);
-}
 const loadShaders = async (id) => {
   try {
     const { default: fragment } = await import(
@@ -25,8 +25,9 @@ const loadShaders = async (id) => {
   }
 };
 
-function init(fragment, vertex) {
-  container = document.getElementById("container");
+function init(containerId = "container", fragment, vertex) {
+  container = document.getElementById(containerId);
+  container.innerHTML = "";
 
   camera = new THREE.Camera();
   camera.position.z = 1;
@@ -66,7 +67,9 @@ function init(fragment, vertex) {
 }
 
 function onWindowResize(event) {
-  renderer.setSize(screen_width, screen_width);
+  const width = container.clientWidth;
+  const height = container.clientHeight;
+  renderer.setSize(width, height);
   uniforms.u_resolution.value.x = renderer.domElement.width;
   uniforms.u_resolution.value.y = renderer.domElement.height;
 }
@@ -80,9 +83,9 @@ function render() {
   uniforms.u_time.value += clock.getDelta();
   renderer.render(scene, camera);
 }
-const load = async (id) =>
-  loadShaders(id).then(({ fragment, vertex }) => {
-    init(fragment, vertex);
+const load = async (id, containerId) =>
+  loadShaders(id, containerId).then(({ fragment, vertex }) => {
+    init(containerId, fragment, vertex);
     animate();
   });
 
