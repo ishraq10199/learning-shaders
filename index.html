@@ -17,6 +17,36 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/tippy.js@6/themes/dark.css"
     /> -->
+    <script>
+      window.entries = [];
+      const loadEntries = () => {
+        const templateHTML = `
+          <template x-for="item in entries" :key="item.id">
+            <div
+              :class="{
+                'p-1 text-xs text-nowrap cursor-pointer': true,
+                'bg-gray-300': selectedEntry !== item.id,
+                'bg-blue-300': selectedEntry === item.id,
+              }"
+              x-html="(item.id + '.').padEnd(5, '\u{2800}') + item.title"
+              x-bind:data-tippy-content="item.description"
+              tabindex="0"
+              x-on:click="() => { selectedEntry = item.id; onEntrySelect(selectedEntry); }"
+            ></div>
+          </template>
+        `;
+        document.getElementById("entryContainer").innerHTML = templateHTML;
+      };
+      fetch("./data.json")
+        .then((res) => res.json())
+        .then((data) => {
+          window.entries = data;
+          loadEntries();
+        })
+        .catch((err) => {
+          console.error("Issue while fetching/parsing `data.json`:", err);
+        });
+    </script>
 
     <script type="module">
       import { load } from "./global/renderer2d.js";
@@ -56,21 +86,10 @@
           Shaders Here
         </div>
         <div class="w-[17.5rem] absolute h-full overflow-y-scroll pt-10">
-          <div class="w-[17rem] divide-y flex flex-col py-0">
-            <template x-for="item in entries" :key="item.id">
-              <div
-                :class="{
-                  'p-1 text-xs text-nowrap cursor-pointer': true,
-                  'bg-gray-300': selectedEntry !== item.id,
-                  'bg-blue-300': selectedEntry === item.id,
-                }"
-                x-html="(item.id + '.').padEnd(5, '\u{2800}') + item.title"
-                x-bind:data-tippy-content="item.description"
-                tabindex="0"
-                x-on:click="() => { selectedEntry = item.id; onEntrySelect(selectedEntry); }"
-              ></div>
-            </template>
-          </div>
+          <div
+            class="w-[17rem] divide-y flex flex-col py-0"
+            id="entryContainer"
+          ></div>
         </div>
         <div class="ml-71 mr-2 border-l-2 h-full bg-white" id="container">
           <div class="flex justify-center h-full items-center">
@@ -100,56 +119,6 @@
   </body>
 
   <script>
-    const entries = [
-      {
-        id: "01",
-        title: "The Screen in Pink",
-        description:
-          "Hello world example, nothing much except a big pink screen.",
-      },
-      {
-        id: "01a",
-        title: "Caramelldansen",
-        description: `Introduced <span class="font-semibold">u_time</span> to flicker
-              the screen with various colors. <div class="italic mt-1">Pairs well with the meme song!</div>`,
-      },
-    ];
-
-    // const makeEntry = ({
-    //   id = "01",
-    //   title = "The Title Here",
-    //   description = "Description",
-    // }) => {
-    //   const outerDiv = document.createElement("div");
-    //   outerDiv.classList.add("bg-white", "rounded-lg", "p-4");
-
-    //   const link = document.createElement("a");
-    //   link.href = `/examples/${id}/`;
-    //   link.classList.add("flex", "flex-col");
-
-    //   const image = document.createElement("img");
-    //   image.classList.add("w-lg");
-    //   image.alt = "...";
-    //   image.src = `/thumbnails/${id}.gif`;
-
-    //   const card = document.createElement("div");
-    //   card.classList.add("flex", "flex-col");
-
-    //   const cardTitle = document.createElement("h5");
-    //   cardTitle.classList.add("font-semibold", "text-xl", "py-2");
-    //   cardTitle.innerText = `${id}. ${title}`;
-
-    //   const cardBody = document.createElement("p");
-    //   cardBody.classList.add("text-wrap", "w-lg");
-    //   cardBody.innerHTML = description;
-
-    //   card.append(cardTitle, cardBody);
-    //   link.append(image, card);
-    //   outerDiv.append(link);
-
-    //   document.querySelector("#entryContainer").append(outerDiv);
-    // };
-
     document.addEventListener("alpine:initialized", () => {
       const id = new URLSearchParams(window.location.search).get("id");
       if (id !== "00") {
