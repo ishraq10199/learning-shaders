@@ -13,10 +13,13 @@
     <!-- Tippy.js (tooltip library) -->
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
+
+    <!-- Tooltip theme -->
     <!-- <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/tippy.js@6/themes/dark.css"
+      href="https://cdn.jsdelivr.net/npm/tippy.js@6/themes/light.css"
     /> -->
+
     <script>
       window.entries = [];
       const loadEntries = () => {
@@ -71,10 +74,32 @@
   </head>
   <body class="font-mono m-0 min-h-svh bg-gray-900">
     <div class="h-svh">
-      <div class="h-[4rem]">
-        <h1 class="text-gray-300 flex items-center justify-center h-full pb-2">
-          Hello there
-        </h1>
+      <div class="h-[4rem] flex items-center justify-between">
+        <a
+          x-data=""
+          :href="window.location.pathname === '/' ? '#' : '/'"
+          class="text-gray-300 flex px-8 items-center h-full font-bold text-xl pointer-events-none"
+        >
+          Learning Shaders
+        </a>
+        <nav class="text-gray-300 flex gap-16 px-8" x-data="">
+          <a
+            :href="window.location.pathname === '/editor/' ? '#' : '/editor/'"
+            :class="{
+              'hover:text-gray-50 hover:font-semibold': true,
+              'text-red-500 pointer-events-none': window.location.pathname === '/editor/',
+            }"
+            >Playground</a
+          >
+          <a
+            :href="window.location.pathname === '/' ? '#' : '/'"
+            :class="{
+              'hover:text-gray-50 hover:font-semibold': true,
+              'text-red-500 pointer-events-none': window.location.pathname === '/',
+            }"
+            >Explore</a
+          >
+        </nav>
       </div>
       <div
         class="relative h-[calc(100%-4rem)]"

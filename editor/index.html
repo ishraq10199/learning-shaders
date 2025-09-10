@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" class="m-0 min-h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/global/glslEditor/glslEditor.css"
+    />
+
+    <!-- Load the following if we need to modify the internals later -->
+    <!-- <script
+      type="application/javascript"
+      src="/global/glslEditor/glslEditor.min.js"
+    ></script> -->
+
+    <script
+      type="application/javascript"
+      src="/global/glslEditor/glslEditor.js"
+    ></script>
+
+    <title>Learning Shaders</title>
+  </head>
+  <body class="font-mono m-0 min-h-svh bg-gray-900">
+    <div class="h-svh">
+      <div class="h-[4rem] flex items-center justify-between">
+        <a
+          x-data=""
+          :href="window.location.pathname === '/' ? '#' : '/'"
+          :class="{
+            'text-gray-300 flex px-8 items-center h-full font-bold text-xl hover:text-red-500': true,
+            'pointer-events-none': window.location.pathname === '/',
+          }"
+        >
+          Learning Shaders
+        </a>
+        <nav class="text-gray-300 flex gap-16 px-8" x-data="">
+          <a
+            :href="window.location.pathname === '/editor/' ? '#' : '/editor/'"
+            :class="{
+              'hover:text-gray-50 hover:font-semibold': true,
+              'text-red-500 pointer-events-none': window.location.pathname === '/editor/',
+            }"
+            >Playground</a
+          >
+          <a
+            :href="window.location.pathname === '/' ? '#' : '/'"
+            :class="{
+              'hover:text-gray-50 hover:font-semibold': true,
+              'text-red-500 pointer-events-none': window.location.pathname === '/',
+            }"
+            >Explore</a
+          >
+        </nav>
+      </div>
+      <div class="relative h-[calc(100%-4rem)] bg-[rgb(39,_40,_35)]" x-data="">
+        <div id="glsl_editor"></div>
+      </div>
+    </div>
+  </body>
+  <style>
+    .ge_canvas_container {
+      top: 7.5rem !important;
+    }
+  </style>
+  <script type="text/javascript">
+    const glslEditor = new GlslEditor("#glsl_editor", {
+      canvas_size: 500,
+      canvas_draggable: true,
+      theme: "monokai",
+      multipleBuffers: true,
+      watchHash: true,
+      fileDrops: true,
+      menu: true,
+    });
+  </script>
+</html>

@@ -4,23 +4,19 @@ var container;
 var camera, scene, renderer, clock;
 var uniforms;
 
-// let screen_width = 500;
-// let viewport_width = window.innerWidth;
-// let viewport_height = window.innerHeight;
-// if (Math.min(viewport_height, viewport_width) < 900) {
-//   screen_width = Math.min(viewport_height, viewport_width) / 2;
-//   console.log(screen_width);
-// }
-
 const loadShaders = async (id) => {
   try {
-    const { default: fragment } = await import(
-      `../data/${id}/fragment_shader.js`
+    const fragment = await fetch(`/data/${id}/shader.frag`).then((res) =>
+      res.text()
     );
-    const { default: vertex } = await import(`../data/${id}/vertex_shader.js`);
+    const fallbackVertex = async () =>
+      fetch(`/data/fallback/shader.vert`).then((res) => res.text());
+    const vertex = await fetch(`/data/${id}/shader.vert`).then((res) =>
+      res.status === 404 ? fallbackVertex() : res.text()
+    );
     return { fragment, vertex };
   } catch (err) {
-    console.error("Shader with id:", id, "not found");
+    console.error("Loading shader data with id:", id, "had errors");
     throw err;
   }
 };
