@@ -1,4 +1,4 @@
-import * as THREE from "../../global/three.module.js";
+import * as THREE from "./three.module.js";
 
 var container;
 var camera, scene, renderer, clock;
@@ -15,9 +15,9 @@ var uniforms;
 const loadShaders = async (id) => {
   try {
     const { default: fragment } = await import(
-      `/data/${id}/fragment_shader.js`
+      `../data/${id}/fragment_shader.js`
     );
-    const { default: vertex } = await import(`/data/${id}/vertex_shader.js`);
+    const { default: vertex } = await import(`../data/${id}/vertex_shader.js`);
     return { fragment, vertex };
   } catch (err) {
     console.error("Shader with id:", id, "not found");

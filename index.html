@@ -10,7 +10,7 @@
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
     <script type="module">
-      import { load } from "/global/renderer2d.js";
+      import { load } from "./global/renderer2d.js";
       const onEntrySelect = (id) => {
         load(id).catch((err) => {
           console.error("Problem loading shader with id:", id);
@@ -86,13 +86,13 @@
     const entries = [
       {
         id: "01",
-        title: "The Big Pink Pixel",
+        title: "The Big Pink",
         description:
           "Hello world example, nothing much except a big pink pixel.",
       },
       {
         id: "01a",
-        title: "The Flickering Pink Pixel",
+        title: "The Flickering Pink",
         description: `Introduced <span class="font-semibold">u_time</span> to flicker
               the pixel in <span class="font-semibold">example 01</span> with
               time.`,
