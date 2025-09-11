@@ -4,3 +4,15 @@
     > Hello world example, nothing much except a big pink screen.
 2.  [Caramelldansen](https://learning-shaders-v1.vercel.app/?id=02)
     > Introduced `u_time` to flicker the screen with various colors. _Pairs well with the meme song!_
+
+## Attribution
+
+Depends on:
+
+- [three.js](https://threejs.org/)
+  > For the showcase rendering
+
+and
+
+- [glslEditor](https://github.com/patriciogonzalezvivo/glslEditor)
+  > For the editor view.
